@@ -435,7 +435,7 @@ ifeq ($(TARGET_WINDOWS),1)
 else
   LD := $(CC)
 endif
-CPP := cpp -P
+CPP := clang -xc -E -P
 OBJDUMP := objdump
 OBJCOPY := objcopy
 PYTHON := python3
