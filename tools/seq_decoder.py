@@ -162,29 +162,29 @@ if sys.argv[1] == "--emit-asm-macros":
         param_list = []
         nibble_param_name = None
         for i, arg in enumerate(args):
-            param_name = chr(97 + i)
+            param_name = chr(48 + i)
             param_names.append(param_name)
             param_list.append(param_name + ("=0" if arg == "ign-arg" else ""))
             if arg == "ign-arg" or arg == "arg":
                 nibble_param_name = param_name
-        print(f".macro {key}_{mn} {', '.join(param_list)}".rstrip())
+        print(f".macro {key}_{mn}".rstrip())
         if nibble_param_name is not None:
-            print(f"    .byte {hex(op)} + \\{nibble_param_name}")
+            print(f"    .byte {hex(op)} + ${nibble_param_name}")
         else:
             print(f"    .byte {hex(op)}")
         for arg, param_name in zip(args, param_names):
             if arg in ['arg', 'ign-arg']:
                 pass
             elif arg in ['s8', 'u8', 'hex8']:
-                print(f"    .byte \\{param_name}")
+                print(f"    .byte ${param_name}")
             elif arg in ['u16', 'hex16']:
-                print_hword("\\" + param_name)
+                print_hword("$" + param_name)
             elif arg == 'addr':
-                print_hword(f"(\\{param_name} - sequence_start)")
+                print_hword(f"(${param_name} - sequence_start)")
             elif arg == 'var_long':
-                print(f"    var_long \\{param_name}")
+                print(f"    var_long ${param_name}")
             elif arg == 'var':
-                print(f"    var \\{param_name}")
+                print(f"    var ${param_name}")
             else:
                 raise Exception("Unknown argument type " + arg)
         print(".endm")
@@ -199,7 +199,7 @@ if sys.argv[1] == "--emit-asm-macros":
         if op is not None:
             print(f"    .byte {hex(op >> 8)}, {hex(op & 0xff)}")
         for param in param_list:
-            print_hword("\\" + param)
+            print_hword("$" + param)
         print(".endm\n")
 
     for key in ['seq', 'chan', 'layer']:
@@ -226,20 +226,20 @@ if sys.argv[1] == "--emit-asm-macros":
 
         if key == 'chan':
             print(".macro chan_writeseq val, pos, offset")
-            print("    .byte 0xc7, \\val")
-            print_hword("(\\pos - sequence_start + \\offset)")
+            print("    .byte 0xc7, $val")
+            print_hword("($pos - sequence_start + $offset)")
             print(".endm\n")
             print(".macro chan_writeseq_nextinstr val, offset")
-            print("    .byte 0xc7, \\val")
-            print_hword("(writeseq\\@ - sequence_start + \\offset)")
-            print("    writeseq\\@:")
+            print("    .byte 0xc7, $val")
+            print_hword("(writeseq$@ - sequence_start + $offset)")
+            print("    writeseq$@:")
             print(".endm\n")
-            print(".macro layer_portamento a, b, c")
-            print("    .byte 0xc7, \\a, \\b")
-            print("    .if ((\\a & 0x80) == 0)")
-            print("        var \\c")
+            print(".macro layer_portamento")
+            print("    .byte 0xc7, $0, $1")
+            print("    .if (($0 & 0x80) == 0)")
+            print("        var $2")
             print("    .else")
-            print("        .byte \\c")
+            print("        .byte $2")
             print("    .endif")
             print(".endm\n")
             emit_cmd(key, 0xfd, ['delay_long', 'var_long'])
@@ -263,18 +263,18 @@ if sys.argv[1] == "--emit-asm-macros":
     emit_env_cmd(None, ['line', 'u16', 'u16'])
 
     print("# other commands\n")
-    print(".macro var_long x")
-    print("     .byte (0x80 | (\\x & 0x7f00) >> 8), (\\x & 0xff)")
+    print(".macro var_long")
+    print("     .byte (0x80 | ($0 & 0x7f00) >> 8), ($0 & 0xff)")
     print(".endm\n")
-    print(".macro var x")
-    print("    .if (\\x >= 0x80)")
-    print("        var_long \\x")
+    print(".macro var")
+    print("    .if ($0 >= 0x80)")
+    print("        var_long $0")
     print("    .else")
-    print("        .byte \\x")
+    print("        .byte $0")
     print("    .endif")
     print(".endm\n")
-    print(".macro sound_ref a")
-    print_hword("(\\a - sequence_start)")
+    print(".macro sound_ref")
+    print_hword("($0 - sequence_start)")
     print(".endm")
     sys.exit(0)
 

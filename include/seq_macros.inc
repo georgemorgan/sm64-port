@@ -3,148 +3,148 @@
 
 # seq commands
 
-.macro seq_testchdisabled a
-    .byte 0x0 + \a
+.macro seq_testchdisabled
+    .byte 0x0 + $0
 .endm
 
-.macro seq_subvariation a=0
-    .byte 0x50 + \a
+.macro seq_subvariation
+    .byte 0x50 + $0
 .endm
 
-.macro seq_setvariation a=0
-    .byte 0x70 + \a
+.macro seq_setvariation
+    .byte 0x70 + $0
 .endm
 
-.macro seq_getvariation a=0
-    .byte 0x80 + \a
+.macro seq_getvariation
+    .byte 0x80 + $0
 .endm
 
-.macro seq_startchannel a, b
-    .byte 0x90 + \a
-    .byte (\b - sequence_start) >> 8, (\b - sequence_start) & 0xff
+.macro seq_startchannel
+    .byte 0x90 + $0
+    .byte ($1 - sequence_start) >> 8, ($1 - sequence_start) & 0xff
 .endm
 
-.macro seq_subtract a
+.macro seq_subtract
     .byte 0xc8
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_bitand a
+.macro seq_bitand
     .byte 0xc9
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_setval a
+.macro seq_setval
     .byte 0xcc
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_setnoteallocationpolicy a
+.macro seq_setnoteallocationpolicy
     .byte 0xd0
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_setshortnotedurationtable a
+.macro seq_setshortnotedurationtable
     .byte 0xd1
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_setshortnotevelocitytable a
+.macro seq_setshortnotevelocitytable
     .byte 0xd2
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_setmutebhv a
+.macro seq_setmutebhv
     .byte 0xd3
-    .byte \a
+    .byte $0
 .endm
 
 .macro seq_mute
     .byte 0xd4
 .endm
 
-.macro seq_setmutescale a
+.macro seq_setmutescale
     .byte 0xd5
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_disablechannels a
+.macro seq_disablechannels
     .byte 0xd6
-    .byte \a >> 8, \a & 0xff
+    .byte $0 >> 8, $0 & 0xff
 .endm
 
-.macro seq_initchannels a
+.macro seq_initchannels
     .byte 0xd7
-    .byte \a >> 8, \a & 0xff
+    .byte $0 >> 8, $0 & 0xff
 .endm
 
-.macro seq_changevol a
+.macro seq_changevol
     .byte 0xda
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_setvol a
+.macro seq_setvol
     .byte 0xdb
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_addtempo a
+.macro seq_addtempo
     .byte 0xdc
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_settempo a
+.macro seq_settempo
     .byte 0xdd
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_transposerel a
+.macro seq_transposerel
     .byte 0xde
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_transpose a
+.macro seq_transpose
     .byte 0xdf
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_bgez a
+.macro seq_bgez
     .byte 0xf5
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
 .macro seq_loopend
     .byte 0xf7
 .endm
 
-.macro seq_loop a
+.macro seq_loop
     .byte 0xf8
-    .byte \a
+    .byte $0
 .endm
 
-.macro seq_bltz a
+.macro seq_bltz
     .byte 0xf9
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_beqz a
+.macro seq_beqz
     .byte 0xfa
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_jump a
+.macro seq_jump
     .byte 0xfb
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_call a
+.macro seq_call
     .byte 0xfc
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro seq_delay a
+.macro seq_delay
     .byte 0xfd
-    var \a
+    var $0
 .endm
 
 .macro seq_delay1
@@ -161,9 +161,9 @@
     .byte 0xf0
 .endm
 
-.macro seq_reservenotes a
+.macro seq_reservenotes
     .byte 0xf1
-    .byte \a
+    .byte $0
 .endm
 
 .else
@@ -172,71 +172,71 @@
     .byte 0xf1
 .endm
 
-.macro seq_reservenotes a
+.macro seq_reservenotes
     .byte 0xf2
-    .byte \a
+    .byte $0
 .endm
 
 .endif
 
 # chan commands
 
-.macro chan_testlayerfinished a
-    .byte 0x0 + \a
+.macro chan_testlayerfinished
+    .byte 0x0 + $0
 .endm
 
-.macro chan_startchannel a, b
-    .byte 0x10 + \a
-    .byte (\b - sequence_start) >> 8, (\b - sequence_start) & 0xff
+.macro chan_startchannel
+    .byte 0x10 + $0
+    .byte ($1 - sequence_start) >> 8, ($1 - sequence_start) & 0xff
 .endm
 
-.macro chan_disablechannel a
-    .byte 0x20 + \a
+.macro chan_disablechannel
+    .byte 0x20 + $0
 .endm
 
-.macro chan_iowriteval2 a, b
-    .byte 0x30 + \a
-    .byte \b
+.macro chan_iowriteval2
+    .byte 0x30 + $0
+    .byte $1
 .endm
 
-.macro chan_ioreadval2 a, b
-    .byte 0x40 + \a
-    .byte \b
+.macro chan_ioreadval2
+    .byte 0x40 + $0
+    .byte $1
 .endm
 
-.macro chan_ioreadvalsub a
-    .byte 0x50 + \a
+.macro chan_ioreadvalsub
+    .byte 0x50 + $0
 .endm
 
-.macro chan_iowriteval a
-    .byte 0x70 + \a
+.macro chan_iowriteval
+    .byte 0x70 + $0
 .endm
 
-.macro chan_ioreadval a
-    .byte 0x80 + \a
+.macro chan_ioreadval
+    .byte 0x80 + $0
 .endm
 
-.macro chan_setlayer a, b
-    .byte 0x90 + \a
-    .byte (\b - sequence_start) >> 8, (\b - sequence_start) & 0xff
+.macro chan_setlayer
+    .byte 0x90 + $0
+    .byte ($1 - sequence_start) >> 8, ($1 - sequence_start) & 0xff
 .endm
 
-.macro chan_freelayer a
-    .byte 0xa0 + \a
+.macro chan_freelayer
+    .byte 0xa0 + $0
 .endm
 
-.macro chan_dynsetlayer a
-    .byte 0xb0 + \a
+.macro chan_dynsetlayer
+    .byte 0xb0 + $0
 .endm
 
-.macro chan_setinstr a
+.macro chan_setinstr
     .byte 0xc1
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setdyntable a
+.macro chan_setdyntable
     .byte 0xc2
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
 .macro chan_largenotesoff
@@ -251,133 +251,133 @@
     .byte 0xc5
 .endm
 
-.macro chan_setbank a
+.macro chan_setbank
     .byte 0xc6
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_subtract a
+.macro chan_subtract
     .byte 0xc8
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_bitand a
+.macro chan_bitand
     .byte 0xc9
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setmutebhv a
+.macro chan_setmutebhv
     .byte 0xca
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_readseq a
+.macro chan_readseq
     .byte 0xcb
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_setval a
+.macro chan_setval
     .byte 0xcc
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_stereoheadseteffects a
+.macro chan_stereoheadseteffects
     .byte 0xd0
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setnoteallocationpolicy a
+.macro chan_setnoteallocationpolicy
     .byte 0xd1
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setsustain a
+.macro chan_setsustain
     .byte 0xd2
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_pitchbend a
+.macro chan_pitchbend
     .byte 0xd3
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setreverb a
+.macro chan_setreverb
     .byte 0xd4
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setupdatesperframe_unimplemented a
+.macro chan_setupdatesperframe_unimplemented
     .byte 0xd6
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setvibratorate a
+.macro chan_setvibratorate
     .byte 0xd7
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setvibratoextent a
+.macro chan_setvibratoextent
     .byte 0xd8
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setdecayrelease a
+.macro chan_setdecayrelease
     .byte 0xd9
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setenvelope a
+.macro chan_setenvelope
     .byte 0xda
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_transpose a
+.macro chan_transpose
     .byte 0xdb
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setpanmix a
+.macro chan_setpanmix
     .byte 0xdc
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setpan a
+.macro chan_setpan
     .byte 0xdd
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_freqscale a
+.macro chan_freqscale
     .byte 0xde
-    .byte \a >> 8, \a & 0xff
+    .byte $0 >> 8, $0 & 0xff
 .endm
 
-.macro chan_setvol a
+.macro chan_setvol
     .byte 0xdf
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setvolscale a
+.macro chan_setvolscale
     .byte 0xe0
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_setvibratoratelinear a, b, c
+.macro chan_setvibratoratelinear
     .byte 0xe1
-    .byte \a
-    .byte \b
-    .byte \c
+    .byte $0
+    .byte $1
+    .byte $2
 .endm
 
-.macro chan_setvibratoextentlinear a, b, c
+.macro chan_setvibratoextentlinear
     .byte 0xe2
-    .byte \a
-    .byte \b
-    .byte \c
+    .byte $0
+    .byte $1
+    .byte $2
 .endm
 
-.macro chan_setvibratodelay a
+.macro chan_setvibratodelay
     .byte 0xe3
-    .byte \a
+    .byte $0
 .endm
 
 .macro chan_dyncall
@@ -388,9 +388,9 @@
     .byte 0xf3
 .endm
 
-.macro chan_bgez a
+.macro chan_bgez
     .byte 0xf5
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
 .macro chan_break
@@ -401,34 +401,34 @@
     .byte 0xf7
 .endm
 
-.macro chan_loop a
+.macro chan_loop
     .byte 0xf8
-    .byte \a
+    .byte $0
 .endm
 
-.macro chan_bltz a
+.macro chan_bltz
     .byte 0xf9
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_beqz a
+.macro chan_beqz
     .byte 0xfa
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_jump a
+.macro chan_jump
     .byte 0xfb
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_call a
+.macro chan_call
     .byte 0xfc
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro chan_delay a
+.macro chan_delay
     .byte 0xfd
-    var \a
+    var $0
 .endm
 
 .macro chan_delay1
@@ -440,102 +440,102 @@
 .endm
 
 .macro chan_writeseq val, pos, offset
-    .byte 0xc7, \val
-    .byte (\pos - sequence_start + \offset) >> 8, (\pos - sequence_start + \offset) & 0xff
+    .byte 0xc7, $val
+    .byte ($pos - sequence_start + $offset) >> 8, ($pos - sequence_start + $offset) & 0xff
 .endm
 
 .macro chan_writeseq_nextinstr val, offset
-    .byte 0xc7, \val
-    .byte (writeseq\@ - sequence_start + \offset) >> 8, (writeseq\@ - sequence_start + \offset) & 0xff
-    writeseq\@:
+    .byte 0xc7, $val
+    .byte (writeseq$@ - sequence_start + $offset) >> 8, (writeseq$@ - sequence_start + $offset) & 0xff
+    writeseq$@:
 .endm
 
-.macro layer_portamento a, b, c
-    .byte 0xc7, \a, \b
-    .if ((\a & 0x80) == 0)
-        var \c
+.macro layer_portamento
+    .byte 0xc7, $0, $1
+    .if (($0 & 0x80) == 0)
+        var $2
     .else
-        .byte \c
+        .byte $2
     .endif
 .endm
 
-.macro chan_delay_long a
+.macro chan_delay_long
     .byte 0xfd
-    var_long \a
+    var_long $0
 .endm
 
 .ifdef VERSION_EU
 
-.macro chan_setnotepriority a
+.macro chan_setnotepriority
     .byte 0xe9
-    .byte \a
+    .byte $0
 .endm
 
 .macro chan_unreservenotes
     .byte 0xf0
 .endm
 
-.macro chan_reservenotes a
+.macro chan_reservenotes
     .byte 0xf1
-    .byte \a
+    .byte $0
 .endm
 
 .else
 
-.macro chan_setnotepriority a
-    .byte 0x60 + \a
+.macro chan_setnotepriority
+    .byte 0x60 + $0
 .endm
 
 .macro chan_unreservenotes
     .byte 0xf1
 .endm
 
-.macro chan_reservenotes a
+.macro chan_reservenotes
     .byte 0xf2
-    .byte \a
+    .byte $0
 .endm
 
 .endif
 
 # layer commands
 
-.macro layer_note0 a, b, c, d
-    .byte 0x0 + \a
-    var \b
-    .byte \c
-    .byte \d
+.macro layer_note0
+    .byte 0x0 + $0
+    var $1
+    .byte $2
+    .byte $3
 .endm
 
-.macro layer_note1 a, b, c
-    .byte 0x40 + \a
-    var \b
-    .byte \c
+.macro layer_note1
+    .byte 0x40 + $0
+    var $1
+    .byte $2
 .endm
 
-.macro layer_note2 a, b, c
-    .byte 0x80 + \a
-    .byte \b
-    .byte \c
+.macro layer_note2
+    .byte 0x80 + $0
+    .byte $1
+    .byte $2
 .endm
 
-.macro layer_delay a
+.macro layer_delay
     .byte 0xc0
-    var \a
+    var $0
 .endm
 
-.macro layer_setshortnotevelocity a
+.macro layer_setshortnotevelocity
     .byte 0xc1
-    .byte \a
+    .byte $0
 .endm
 
-.macro layer_transpose a
+.macro layer_transpose
     .byte 0xc2
-    .byte \a
+    .byte $0
 .endm
 
-.macro layer_setshortnotedefaultplaypercentage a
+.macro layer_setshortnotedefaultplaypercentage
     .byte 0xc3
-    var \a
+    var $0
 .endm
 
 .macro layer_somethingon
@@ -546,108 +546,108 @@
     .byte 0xc5
 .endm
 
-.macro layer_setinstr a
+.macro layer_setinstr
     .byte 0xc6
-    .byte \a
+    .byte $0
 .endm
 
 .macro layer_disableportamento
     .byte 0xc8
 .endm
 
-.macro layer_setshortnoteduration a
+.macro layer_setshortnoteduration
     .byte 0xc9
-    .byte \a
+    .byte $0
 .endm
 
-.macro layer_setpan a
+.macro layer_setpan
     .byte 0xca
-    .byte \a
+    .byte $0
 .endm
 
-.macro layer_setshortnotevelocityfromtable a
-    .byte 0xd0 + \a
+.macro layer_setshortnotevelocityfromtable
+    .byte 0xd0 + $0
 .endm
 
-.macro layer_setshortnotedurationfromtable a
-    .byte 0xe0 + \a
+.macro layer_setshortnotedurationfromtable
+    .byte 0xe0 + $0
 .endm
 
 .macro layer_loopend
     .byte 0xf7
 .endm
 
-.macro layer_loop a
+.macro layer_loop
     .byte 0xf8
-    .byte \a
+    .byte $0
 .endm
 
-.macro layer_jump a
+.macro layer_jump
     .byte 0xfb
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
-.macro layer_call a
+.macro layer_call
     .byte 0xfc
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
 
 .macro layer_end
     .byte 0xff
 .endm
 
-.macro layer_delay_long a
+.macro layer_delay_long
     .byte 0xc0
-    var_long \a
+    var_long $0
 .endm
 
-.macro layer_note1_long a, b, c
-    .byte 0x40 + \a
-    var_long \b
-    .byte \c
+.macro layer_note1_long
+    .byte 0x40 + $0
+    var_long $1
+    .byte $2
 .endm
 
 # envelope commands
 
 .macro envelope_disable a
     .byte 0x0, 0x0
-    .byte \a >> 8, \a & 0xff
+    .byte $a >> 8, $a & 0xff
 .endm
 
 .macro envelope_hang a
     .byte 0xff, 0xff
-    .byte \a >> 8, \a & 0xff
+    .byte $a >> 8, $a & 0xff
 .endm
 
 .macro envelope_goto a
     .byte 0xff, 0xfe
-    .byte \a >> 8, \a & 0xff
+    .byte $a >> 8, $a & 0xff
 .endm
 
 .macro envelope_restart a
     .byte 0xff, 0xfd
-    .byte \a >> 8, \a & 0xff
+    .byte $a >> 8, $a & 0xff
 .endm
 
 .macro envelope_line a, b
-    .byte \a >> 8, \a & 0xff
-    .byte \b >> 8, \b & 0xff
+    .byte $a >> 8, $a & 0xff
+    .byte $b >> 8, $b & 0xff
 .endm
 
 # other commands
 
-.macro var_long x
-     .byte (0x80 | (\x & 0x7f00) >> 8), (\x & 0xff)
+.macro var_long
+     .byte (0x80 | ($0 & 0x7f00) >> 8), ($0 & 0xff)
 .endm
 
-.macro var x
-    .if (\x >= 0x80)
-        var_long \x
+.macro var
+    .if ($0 >= 0x80)
+        var_long $0
     .else
-        .byte \x
+        .byte $0
     .endif
 .endm
 
-.macro sound_ref a
-    .byte (\a - sequence_start) >> 8, (\a - sequence_start) & 0xff
+.macro sound_ref
+    .byte ($0 - sequence_start) >> 8, ($0 - sequence_start) & 0xff
 .endm
