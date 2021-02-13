@@ -797,7 +797,7 @@ $(BUILD_DIR)/%.o: $(BUILD_DIR)/%.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(BUILD_DIR)/%.o: %.s
-	$(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@ $<
+	$(AS) $(ASFLAGS) -o $@ $<
 
 ifeq ($(TARGET_N64),1)
 $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
