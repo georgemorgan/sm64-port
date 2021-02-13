@@ -227,13 +227,13 @@ if sys.argv[1] == "--emit-asm-macros":
                 emit_cmd(key, op, cmds[op])
 
         if key == 'chan':
-            print(".macro chan_writeseq val, pos, offset")
-            print("    .byte 0xc7, $val")
-            print_hword("($pos - sequence_start + $offset)")
+            print(".macro chan_writeseq")
+            print("    .byte 0xc7, $0")
+            print_hword("($1 - sequence_start + $2)")
             print(".endm\n")
             print(".macro chan_writeseq_nextinstr")
-            print("    .byte 0xc7, $val")
-            print_hword(f"(writeseq_{writeseq_counter} - sequence_start + $offset)")
+            print("    .byte 0xc7, $0")
+            print_hword(f"(writeseq_{writeseq_counter} - sequence_start + $1)")
             print(f"    writeseq_{writeseq_counter}:")
             print(".endm\n")
             print(".macro layer_portamento")

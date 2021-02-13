@@ -439,14 +439,14 @@
     .byte 0xff
 .endm
 
-.macro chan_writeseq val, pos, offset
-    .byte 0xc7, $val
-    .byte (($pos - sequence_start + $offset) >> 8), (($pos - sequence_start + $offset) & 0xff)
+.macro chan_writeseq
+    .byte 0xc7, $0
+    .byte (($1 - sequence_start + $2) >> 8), (($1 - sequence_start + $2) & 0xff)
 .endm
 
 .macro chan_writeseq_nextinstr
-    .byte 0xc7, $val
-    .byte ((writeseq_0 - sequence_start + $offset) >> 8), ((writeseq_0 - sequence_start + $offset) & 0xff)
+    .byte 0xc7, $0
+    .byte ((writeseq_0 - sequence_start + $1) >> 8), ((writeseq_0 - sequence_start + $1) & 0xff)
     writeseq_0:
 .endm
 
