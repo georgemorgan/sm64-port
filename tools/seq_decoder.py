@@ -153,7 +153,7 @@ if sys.argv[1] == "--emit-asm-macros":
     print("# To regenerate it, run: ./tools/seq_decoder.py --emit-asm-macros >seq_macros.inc")
     print()
     def print_hword(x):
-        print(f"    .byte {x} >> 8, {x} & 0xff")
+        print(f"    .byte ({x} >> 8), ({x} & 0xff)")
 
     def emit_cmd(key, op, cmd):
         mn = cmd[0]
@@ -194,8 +194,8 @@ if sys.argv[1] == "--emit-asm-macros":
         mn = cmd[0]
         param_list = []
         for i, arg in enumerate(cmd[1:]):
-            param_list.append(chr(97 + i))
-        print(f".macro envelope_{mn} {', '.join(param_list)}".rstrip())
+            param_list.append(chr(48 + i))
+        print(f".macro envelope_{mn}".rstrip())
         if op is not None:
             print(f"    .byte {hex(op >> 8)}, {hex(op & 0xff)}")
         for param in param_list:
@@ -229,7 +229,7 @@ if sys.argv[1] == "--emit-asm-macros":
             print("    .byte 0xc7, $val")
             print_hword("($pos - sequence_start + $offset)")
             print(".endm\n")
-            print(".macro chan_writeseq_nextinstr val, offset")
+            print(".macro chan_writeseq_nextinstr")
             print("    .byte 0xc7, $val")
             print_hword("(writeseq$@ - sequence_start + $offset)")
             print("    writeseq$@:")

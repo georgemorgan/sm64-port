@@ -1,5 +1,5 @@
 .include "seq_macros.inc"
-.section .rodata
+.const
 .align 0
 sequence_start:
 
@@ -2694,7 +2694,7 @@ layer_jump .layer_C4E
   chan_setinstr 0
   chan_setlayer 0, .layer_FA2_eu
   chan_end
-  
+
   .layer_FA2_eu:
   layer_delay 0x5
   layer_end
@@ -7988,173 +7988,173 @@ layer_jump .layer_32B7
 
 .align 2, 0
 .envelope_32C4:
-envelope_line 7 20000
-envelope_line 6 32700
-envelope_line 32700 32700
+envelope_line 7, 20000
+envelope_line 6, 32700
+envelope_line 32700, 32700
 envelope_goto 2
 
 .envelope_32D4:
-envelope_line 9 15000
-envelope_line 7 32700
-envelope_line 32700 32700
+envelope_line 9, 15000
+envelope_line 7, 32700
+envelope_line 32700, 32700
 envelope_goto 2
 
 .envelope_32E4:
-envelope_line 10 10000
-envelope_line 100 32700
-envelope_line 32700 32700
+envelope_line 10, 10000
+envelope_line 100, 32700
+envelope_line 32700, 32700
 envelope_goto 2
 
 .envelope_32F4:
-envelope_line 35 32700
-envelope_line 10 32700
-envelope_line 300 0
+envelope_line 35, 32700
+envelope_line 10, 32700
+envelope_line 300, 0
 envelope_goto 2
 
 .envelope_3304:
-envelope_line 15 20000
-envelope_line 5 32700
-envelope_line 32700 32700
+envelope_line 15, 20000
+envelope_line 5, 32700
+envelope_line 32700, 32700
 envelope_goto 2
 
 .envelope_3314:
-envelope_line 8 32700
-envelope_line 50 32700
-envelope_line 300 0
+envelope_line 8, 32700
+envelope_line 50, 32700
+envelope_line 300, 0
 envelope_goto 2
 
 .envelope_3324:
-envelope_line 100 25000
-envelope_line 35 32700
-envelope_line 300 5000
+envelope_line 100, 25000
+envelope_line 35, 32700
+envelope_line 300, 5000
 envelope_goto 2
 
 .envelope_3334:
-envelope_line 25 32700
-envelope_line 4 22500
-envelope_line 35 32700
+envelope_line 25, 32700
+envelope_line 4, 22500
+envelope_line 35, 32700
 envelope_goto 2
 
 .envelope_3344:
-envelope_line 1 32700
-envelope_line 10 30000
-envelope_line 50 30000
-envelope_line 100 0
+envelope_line 1, 32700
+envelope_line 10, 30000
+envelope_line 50, 30000
+envelope_line 100, 0
 envelope_goto 3
 
 .envelope_3358:
-envelope_line 4 32700
-envelope_line 100 15000
-envelope_line 1000 0
+envelope_line 4, 32700
+envelope_line 100, 15000
+envelope_line 1000, 0
 envelope_goto 2
 
 .envelope_3368:
-envelope_line 10 32700
-envelope_line 1 32700
-envelope_line 10 0
+envelope_line 10, 32700
+envelope_line 1, 32700
+envelope_line 10, 0
 envelope_goto 2
 
 .ifndef VERSION_JP
   .envelope_3378:
-  envelope_line 3 32700
-  envelope_line 10 30000
-  envelope_line 10 10000
-  envelope_line 100 0
+  envelope_line 3, 32700
+  envelope_line 10, 30000
+  envelope_line 10, 10000
+  envelope_line 100, 0
   envelope_goto 3
 .endif
 
 .envelope_338C:
-envelope_line 1 32700
-envelope_line 20 32700
-envelope_line 600 6000
+envelope_line 1, 32700
+envelope_line 20, 32700
+envelope_line 600, 6000
 envelope_goto 2
 
 .envelope_unused_339C:
-envelope_line 1 32700
-envelope_line 20 32700
-envelope_line 100 18000
+envelope_line 1, 32700
+envelope_line 20, 32700
+envelope_line 100, 18000
 envelope_goto 2
 
 .envelope_33AC:
-envelope_line 1 32700
-envelope_line 20 32700
-envelope_line 300 6000
+envelope_line 1, 32700
+envelope_line 20, 32700
+envelope_line 300, 6000
 envelope_goto 2
 
 .envelope_33BC:
-envelope_line 7 18000
-envelope_line 4 32760
-envelope_line 30 0
+envelope_line 7, 18000
+envelope_line 4, 32760
+envelope_line 30, 0
 envelope_goto 2
 
 .envelope_33CC:
-envelope_line 19 32700
-envelope_line 5 32700
-envelope_line 15 0
+envelope_line 19, 32700
+envelope_line 5, 32700
+envelope_line 15, 0
 envelope_goto 2
 
 .envelope_33DC:
-envelope_line 25 32700
-envelope_line 9 32700
-envelope_line 9 0
+envelope_line 25, 32700
+envelope_line 9, 32700
+envelope_line 9, 0
 envelope_goto 2
 
 .envelope_33EC:
-envelope_line 1 32700
-envelope_line 100 32760
-envelope_line 300 0
+envelope_line 1, 32700
+envelope_line 100, 32760
+envelope_line 300, 0
 envelope_goto 2
 
 .envelope_33FC:
-envelope_line 22 32700
-envelope_line 50 32760
-envelope_line 70 0
+envelope_line 22, 32700
+envelope_line 50, 32760
+envelope_line 70, 0
 envelope_goto 2
 
 .envelope_340C:
-envelope_line 5 32760
-envelope_line 192 0
-envelope_line 1000 1000
+envelope_line 5, 32760
+envelope_line 192, 0
+envelope_line 1000, 1000
 envelope_goto 2
 
 .envelope_341C:
-envelope_line 25 32760
-envelope_line 60 10000
+envelope_line 25, 32760
+envelope_line 60, 10000
 envelope_goto 2
 
 .envelope_3428:
-envelope_line 1 10000
-envelope_line 1 10000
-envelope_line 40 32760
+envelope_line 1, 10000
+envelope_line 1, 10000
+envelope_line 40, 32760
 envelope_goto 2
 
 .envelope_3438:
-envelope_line 23 32760
-envelope_line 80 15000
+envelope_line 23, 32760
+envelope_line 80, 15000
 envelope_goto 2
 
 .envelope_3444:
-envelope_line 22 32760
-envelope_line 50 32760
-envelope_line 100 25000
+envelope_line 22, 32760
+envelope_line 50, 32760
+envelope_line 100, 25000
 envelope_goto 2
 
 .envelope_3454:
-envelope_line 13 32760
-envelope_line 50 32760
-envelope_line 200 0
+envelope_line 13, 32760
+envelope_line 50, 32760
+envelope_line 200, 0
 envelope_goto 2
 
 .envelope_3464:
-envelope_line 6 12000
-envelope_line 4 32760
-envelope_line 50 32760
-envelope_line 200 0
+envelope_line 6, 12000
+envelope_line 4, 32760
+envelope_line 50, 32760
+envelope_line 200, 0
 envelope_goto 2
 
 .envelope_unused_3478:
-envelope_line 1 32700
-envelope_line 1000 32700
-envelope_line 10 16000
-envelope_line 200 32760
+envelope_line 1, 32700
+envelope_line 1000, 32700
+envelope_line 10, 16000
+envelope_line 200, 32760
 envelope_goto 3
