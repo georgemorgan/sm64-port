@@ -445,9 +445,9 @@
 .endm
 
 .macro chan_writeseq_nextinstr
-    .byte 0xc7, $0
-    .byte ((writeseq_0 - sequence_start + $1) >> 8), ((writeseq_0 - sequence_start + $1) & 0xff)
-    writeseq_0:
+    .byte 0xc7, $1
+    .byte ((writeseq_$0 - sequence_start + $2) >> 8), ((writeseq_$0 - sequence_start + $2) & 0xff)
+    writeseq_$0:
 .endm
 
 .macro layer_portamento

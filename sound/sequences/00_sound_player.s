@@ -209,7 +209,7 @@ chan_jump .main_loop_7
 
 ; Delay for a number of ticks (1-255) in an interruptible manner.
 .delay:
-chan_writeseq_nextinstr 0, 1
+chan_writeseq_nextinstr 0, 0, 1
 chan_loop 20
 chan_delay1
 chan_ioreadval 0
@@ -232,7 +232,7 @@ chan_end
 ; is done by writing to IO slot 5 and letting get_sound_reverb in external.c
 ; do the necessary math.
 .set_reverb:
-chan_writeseq_nextinstr 0, 1
+chan_writeseq_nextinstr 1, 0, 1
 chan_setreverb 10
 chan_iowriteval 5
 chan_end
@@ -4195,7 +4195,7 @@ chan_ioreadval 7
 chan_subtract 1
 chan_beqz .chan_1957
 chan_iowriteval 7
-chan_writeseq_nextinstr 0, 1
+chan_writeseq_nextinstr 2, 0, 1
 chan_setvolscale 127
 chan_jump .chan_1942
 .chan_1957:

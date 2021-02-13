@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import sys
 
-writeseq_counter = 0
-
 commands = {}
 commands['seq'] = {
     # non-arg commands
@@ -232,9 +230,9 @@ if sys.argv[1] == "--emit-asm-macros":
             print_hword("($1 - sequence_start + $2)")
             print(".endm\n")
             print(".macro chan_writeseq_nextinstr")
-            print("    .byte 0xc7, $0")
-            print_hword(f"(writeseq_{writeseq_counter} - sequence_start + $1)")
-            print(f"    writeseq_{writeseq_counter}:")
+            print("    .byte 0xc7, $1")
+            print_hword(f"(writeseq_$0 - sequence_start + $2)")
+            print(f"    writeseq_$0:")
             print(".endm\n")
             print(".macro layer_portamento")
             print("    .byte 0xc7, $0, $1")
@@ -245,7 +243,6 @@ if sys.argv[1] == "--emit-asm-macros":
             print("    .endif")
             print(".endm\n")
             emit_cmd(key, 0xfd, ['delay_long', 'var_long'])
-            writeseq_counter += 1
         if key == 'layer':
             emit_cmd(key, 0xc0, ['delay_long', 'var_long'])
             emit_cmd(key, 0x40, ['note1_long', 'arg', 'var_long', 'u8'])
