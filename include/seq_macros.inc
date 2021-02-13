@@ -446,8 +446,8 @@
 
 .macro chan_writeseq_nextinstr
     .byte 0xc7, $val
-    .byte ((writeseq$@ - sequence_start + $offset) >> 8), ((writeseq$@ - sequence_start + $offset) & 0xff)
-    writeseq$@:
+    .byte ((writeseq_0 - sequence_start + $offset) >> 8), ((writeseq_0 - sequence_start + $offset) & 0xff)
+    writeseq_0:
 .endm
 
 .macro layer_portamento
