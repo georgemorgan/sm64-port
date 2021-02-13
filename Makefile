@@ -465,8 +465,8 @@ ifeq ($(ENABLE_OPENGL),1)
     GFX_LDFLAGS += $(shell sdl2-config --libs) -lglew32 -lopengl32 -lwinmm -limm32 -lversion -loleaut32 -lsetupapi
   endif
   ifeq ($(TARGET_LINUX),1)
-    GFX_CFLAGS  += $(shell sdl2-config --cflags)
-    GFX_LDFLAGS += -lGL $(shell sdl2-config --libs) -lX11 -lXrandr
+    GFX_CFLAGS  += $(shell sdl2-config --cflags) $(shell pkg-config --cflags glew)
+    GFX_LDFLAGS += -lGL $(shell sdl2-config --libs) $(shell pkg-config --libs glew) -lX11 -lXrandr
   endif
   ifeq ($(TARGET_WEB),1)
     GFX_CFLAGS  += -s USE_SDL=2

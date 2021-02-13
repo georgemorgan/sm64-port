@@ -2,13 +2,13 @@
 
 #if !defined(__linux__) && !defined(__BSD__) && defined(ENABLE_OPENGL)
 
-#ifdef __MINGW32__
-#define FOR_WINDOWS 1
+#if defined(__MINGW32__) || defined(__APPLE__)
+#define USE_GLEW 1
 #else
-#define FOR_WINDOWS 0
+#define USE_GLEW 0
 #endif
 
-#if FOR_WINDOWS
+#if USE_GLEW
 #include <GL/glew.h>
 #include "SDL.h"
 #define GL_GLEXT_PROTOTYPES 1
