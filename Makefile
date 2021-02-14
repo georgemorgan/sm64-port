@@ -447,7 +447,7 @@ ifeq ($(TARGET_WINDOWS),1)
 endif
 ifeq ($(TARGET_LINUX),1)
   PLATFORM_CFLAGS  := -DTARGET_LINUX $(shell pkg-config --cflags libusb-1.0) $(shell pkg-config --cflags sdl2)
-  PLATFORM_LDFLAGS := -lm -lpthread $(shell pkg-config --libs libusb-1.0) $(shell pkg-config --libs sdl2) -lasound -lpulse -no-pie
+  PLATFORM_LDFLAGS := -lm -lpthread $(shell pkg-config --libs libusb-1.0) $(shell pkg-config --libs sdl2)
 endif
 ifeq ($(TARGET_WEB),1)
   PLATFORM_CFLAGS  := -DTARGET_WEB
@@ -466,7 +466,7 @@ ifeq ($(ENABLE_OPENGL),1)
   endif
   ifeq ($(TARGET_LINUX),1)
     GFX_CFLAGS  += $(shell sdl2-config --cflags) $(shell pkg-config --cflags glew)
-    GFX_LDFLAGS += -lGL $(shell sdl2-config --libs) $(shell pkg-config --libs glew) -lX11 -lXrandr
+    GFX_LDFLAGS += $(shell sdl2-config --libs) $(shell pkg-config --libs glew) -framework OpenGL
   endif
   ifeq ($(TARGET_WEB),1)
     GFX_CFLAGS  += -s USE_SDL=2
@@ -696,7 +696,7 @@ $(SOUND_BIN_DIR)/bank_sets: $(SOUND_BIN_DIR)/sequences.bin
 	@true
 
 $(SOUND_BIN_DIR)/%.m64: $(SOUND_BIN_DIR)/%.o
-	$(OBJCOPY) -j .rodata $< -O binary $@
+	$(OBJCOPY) -j .const $< -O binary $@
 
 $(SOUND_BIN_DIR)/%.o: $(SOUND_BIN_DIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<

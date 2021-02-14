@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import sys
+from random import randint
 
 commands = {}
 commands['seq'] = {
@@ -153,7 +154,10 @@ if sys.argv[1] == "--emit-asm-macros":
     print("# To regenerate it, run: ./tools/seq_decoder.py --emit-asm-macros >seq_macros.inc")
     print()
     def print_hword(x):
-        print(f"    .byte ({x} >> 8), ({x} & 0xff)")
+        val = randint(0, 9999)
+        print(f"    byte_a = ({x} >> 8)")
+        print(f"    byte_b = ({x} & 0xff)")
+        print(f"    .byte byte_{val}_a, byte_{val}_b")
 
     def emit_cmd(key, op, cmd):
         mn = cmd[0]

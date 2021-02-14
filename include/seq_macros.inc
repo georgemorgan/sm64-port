@@ -21,7 +21,9 @@
 
 .macro seq_startchannel
     .byte 0x90 + $0
-    .byte (($1 - sequence_start) >> 8), (($1 - sequence_start) & 0xff)
+    byte_a = (($1 - sequence_start) >> 8)
+    byte_b = (($1 - sequence_start) & 0xff)
+    .byte byte_3921_a, byte_3921_b
 .endm
 
 .macro seq_subtract
@@ -46,12 +48,16 @@
 
 .macro seq_setshortnotedurationtable
     .byte 0xd1
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_3542_a, byte_3542_b
 .endm
 
 .macro seq_setshortnotevelocitytable
     .byte 0xd2
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_4313_a, byte_4313_b
 .endm
 
 .macro seq_setmutebhv
@@ -70,12 +76,16 @@
 
 .macro seq_disablechannels
     .byte 0xd6
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_1557_a, byte_1557_b
 .endm
 
 .macro seq_initchannels
     .byte 0xd7
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_2884_a, byte_2884_b
 .endm
 
 .macro seq_changevol
@@ -110,7 +120,9 @@
 
 .macro seq_bgez
     .byte 0xf5
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_7403_a, byte_7403_b
 .endm
 
 .macro seq_loopend
@@ -124,22 +136,30 @@
 
 .macro seq_bltz
     .byte 0xf9
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_8031_a, byte_8031_b
 .endm
 
 .macro seq_beqz
     .byte 0xfa
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_3075_a, byte_3075_b
 .endm
 
 .macro seq_jump
     .byte 0xfb
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_9347_a, byte_9347_b
 .endm
 
 .macro seq_call
     .byte 0xfc
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_9510_a, byte_9510_b
 .endm
 
 .macro seq_delay
@@ -187,7 +207,9 @@
 
 .macro chan_startchannel
     .byte 0x10 + $0
-    .byte (($1 - sequence_start) >> 8), (($1 - sequence_start) & 0xff)
+    byte_a = (($1 - sequence_start) >> 8)
+    byte_b = (($1 - sequence_start) & 0xff)
+    .byte byte_4868_a, byte_4868_b
 .endm
 
 .macro chan_disablechannel
@@ -218,7 +240,9 @@
 
 .macro chan_setlayer
     .byte 0x90 + $0
-    .byte (($1 - sequence_start) >> 8), (($1 - sequence_start) & 0xff)
+    byte_a = (($1 - sequence_start) >> 8)
+    byte_b = (($1 - sequence_start) & 0xff)
+    .byte byte_8143_a, byte_8143_b
 .endm
 
 .macro chan_freelayer
@@ -236,7 +260,9 @@
 
 .macro chan_setdyntable
     .byte 0xc2
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_2188_a, byte_2188_b
 .endm
 
 .macro chan_largenotesoff
@@ -273,7 +299,9 @@
 
 .macro chan_readseq
     .byte 0xcb
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_3742_a, byte_3742_b
 .endm
 
 .macro chan_setval
@@ -328,7 +356,9 @@
 
 .macro chan_setenvelope
     .byte 0xda
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_8485_a, byte_8485_b
 .endm
 
 .macro chan_transpose
@@ -348,7 +378,9 @@
 
 .macro chan_freqscale
     .byte 0xde
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_8883_a, byte_8883_b
 .endm
 
 .macro chan_setvol
@@ -390,7 +422,9 @@
 
 .macro chan_bgez
     .byte 0xf5
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_3444_a, byte_3444_b
 .endm
 
 .macro chan_break
@@ -408,22 +442,30 @@
 
 .macro chan_bltz
     .byte 0xf9
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_1589_a, byte_1589_b
 .endm
 
 .macro chan_beqz
     .byte 0xfa
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_1207_a, byte_1207_b
 .endm
 
 .macro chan_jump
     .byte 0xfb
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_7704_a, byte_7704_b
 .endm
 
 .macro chan_call
     .byte 0xfc
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_5913_a, byte_5913_b
 .endm
 
 .macro chan_delay
@@ -441,12 +483,16 @@
 
 .macro chan_writeseq
     .byte 0xc7, $0
-    .byte (($1 - sequence_start + $2) >> 8), (($1 - sequence_start + $2) & 0xff)
+    byte_a = (($1 - sequence_start + $2) >> 8)
+    byte_b = (($1 - sequence_start + $2) & 0xff)
+    .byte byte_1508_a, byte_1508_b
 .endm
 
 .macro chan_writeseq_nextinstr
     .byte 0xc7, $1
-    .byte ((writeseq_$0 - sequence_start + $2) >> 8), ((writeseq_$0 - sequence_start + $2) & 0xff)
+    byte_a = ((writeseq_$0 - sequence_start + $2) >> 8)
+    byte_b = ((writeseq_$0 - sequence_start + $2) & 0xff)
+    .byte byte_7107_a, byte_7107_b
     writeseq_$0:
 .endm
 
@@ -584,12 +630,16 @@
 
 .macro layer_jump
     .byte 0xfb
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_524_a, byte_524_b
 .endm
 
 .macro layer_call
     .byte 0xfc
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_4752_a, byte_4752_b
 .endm
 
 .macro layer_end
@@ -611,27 +661,39 @@
 
 .macro envelope_disable
     .byte 0x0, 0x0
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_457_a, byte_457_b
 .endm
 
 .macro envelope_hang
     .byte 0xff, 0xff
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_6920_a, byte_6920_b
 .endm
 
 .macro envelope_goto
     .byte 0xff, 0xfe
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_4432_a, byte_4432_b
 .endm
 
 .macro envelope_restart
     .byte 0xff, 0xfd
-    .byte ($0 >> 8), ($0 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_7411_a, byte_7411_b
 .endm
 
 .macro envelope_line
-    .byte ($0 >> 8), ($0 & 0xff)
-    .byte ($1 >> 8), ($1 & 0xff)
+    byte_a = ($0 >> 8)
+    byte_b = ($0 & 0xff)
+    .byte byte_8635_a, byte_8635_b
+    byte_a = ($1 >> 8)
+    byte_b = ($1 & 0xff)
+    .byte byte_9743_a, byte_9743_b
 .endm
 
 # other commands
@@ -649,5 +711,7 @@
 .endm
 
 .macro sound_ref
-    .byte (($0 - sequence_start) >> 8), (($0 - sequence_start) & 0xff)
+    byte_a = (($0 - sequence_start) >> 8)
+    byte_b = (($0 - sequence_start) & 0xff)
+    .byte byte_318_a, byte_318_b
 .endm
